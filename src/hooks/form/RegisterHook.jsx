@@ -5,6 +5,7 @@ import InputHook from "../input/InputHook";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import RadioHook from "../radio/RadioHook";
+import CheckboxHook from "../checkbox/CheckboxHook";
 
 const schema = yup
   .object({
@@ -84,10 +85,21 @@ const RegisterHook = () => {
             <span>Nam</span>
           </div>
           <div className="flex items-center gap-x-3">
-            <RadioHook name="gender" control={control} value="female"></RadioHook>
+            <RadioHook
+              name="gender"
+              control={control}
+              value="female"
+            ></RadioHook>
             <span>Nữ</span>
           </div>
         </div>
+      </div>
+      <div className="flex flex-col gap-3 mb-5">
+        <CheckboxHook
+          control={control}
+          text="I accept the terms and conditions"
+          name="term"
+        ></CheckboxHook>
       </div>
       <button className="w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold">
         Submit
