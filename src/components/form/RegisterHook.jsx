@@ -8,6 +8,24 @@ import RadioHook from "../radio/RadioHook";
 import CheckboxHook from "../checkbox/CheckboxHook";
 import DropdownHook from "../dropdown/DropdownHook";
 
+const dropdownData = [
+  {
+    id: 1,
+    name: "teacher",
+    text: "Teacher",
+  },
+  {
+    id: 2,
+    name: "student",
+    text: "Student",
+  },
+  {
+    id: 3,
+    name: "doctor",
+    text: "Doctor",
+  },
+];
+
 const schema = yup
   .object({
     username: yup.string().required(),
@@ -98,7 +116,13 @@ const RegisterHook = () => {
       </div>
       <div className="flex flex-col gap-3 mb-5">
         <label>Are you</label>
-        <DropdownHook control={control} setValue={setValue} name="job"></DropdownHook>
+        <DropdownHook
+          control={control}
+          setValue={setValue}
+          name="job"
+          data={dropdownData}
+        //   dropdownLabel="Select your job"
+        ></DropdownHook>
       </div>
       <div className="flex flex-col gap-3 mb-5">
         <CheckboxHook
