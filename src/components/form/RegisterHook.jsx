@@ -21,6 +21,7 @@ const RegisterHook = () => {
     handleSubmit,
     formState: { errors },
     control,
+    setValue,
   } = useForm({
     resolver: yupResolver(schema),
   });
@@ -97,7 +98,7 @@ const RegisterHook = () => {
       </div>
       <div className="flex flex-col gap-3 mb-5">
         <label>Are you</label>
-        <DropdownHook control={control}></DropdownHook>
+        <DropdownHook control={control} setValue={setValue} name="job"></DropdownHook>
       </div>
       <div className="flex flex-col gap-3 mb-5">
         <CheckboxHook
