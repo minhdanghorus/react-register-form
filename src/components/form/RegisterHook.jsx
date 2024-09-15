@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import RadioHook from "../radio/RadioHook";
 import CheckboxHook from "../checkbox/CheckboxHook";
+import DropdownHook from "../dropdown/DropdownHook";
 
 const schema = yup
   .object({
@@ -93,6 +94,10 @@ const RegisterHook = () => {
             <span>Nữ</span>
           </div>
         </div>
+      </div>
+      <div className="flex flex-col gap-3 mb-5">
+        <label>Are you</label>
+        <DropdownHook control={control}></DropdownHook>
       </div>
       <div className="flex flex-col gap-3 mb-5">
         <CheckboxHook
