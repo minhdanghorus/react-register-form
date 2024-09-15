@@ -79,10 +79,16 @@ const DropdownHook = ({
           Doctor
         </div> */}
 
-        {data.map((item) => (
+        {data.map((item, index) => (
           <div
             key={item.id}
-            className="p-5 cursor-pointer hover:bg-gray-100"
+            className={`p-5 cursor-pointer hover:bg-gray-100 ${
+              index === 0
+                ? "rounded-t-lg"
+                : index === data.length - 1
+                ? "rounded-b-lg"
+                : ""
+            }`}
             onClick={handleClickDropdownItem}
             data-value={item.name}
           >
