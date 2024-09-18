@@ -43,25 +43,53 @@ const schema = yup
     //       "Your password must have at least 1 uppercase, 1 lowercase, 1 special character",
     //   }
     // ).required("Please enter your password"),
-    gender: yup.string().required("Please select your gender").oneOf(['male', 'female'], "You can only select male or female"),
-    job: yup.string().required("Please select your job").oneOf(['teacher', 'student', 'doctor'], "You can only select teacher, student or doctor"),
-    term: yup.boolean().required("Please accept the terms and conditions").oneOf([true], "You must accept the terms and conditions")
+    gender: yup
+      .string()
+      .required("Please select your gender")
+      .oneOf(["male", "female"], "You can only select male or female"),
+    job: yup
+      .string()
+      .required("Please select your job")
+      .oneOf(
+        ["teacher", "student", "doctor"],
+        "You can only select teacher, student or doctor"
+      ),
+    term: yup
+      .boolean()
+      .required("Please accept the terms and conditions")
+      .oneOf([true], "You must accept the terms and conditions"),
   })
   .required();
 
 const RegisterHook = () => {
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid, isSubmitting },
     control,
     setValue,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
+    mode: "onChange",
   });
   console.log(errors);
-  
+
   const onSubmitHandler = (values) => {
-    console.log("values: ", values);
+    if (!isValid) return;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        console.log("values: ", values);
+        resolve();
+        reset({
+          username: "",
+          email: "",
+          password: "",
+          gender: "",
+          job: "",
+          term: false,
+        });
+      }, 3000);
+    });
   };
   return (
     <form
@@ -152,8 +180,17 @@ const RegisterHook = () => {
         ></CheckboxHook>
         {<p className=" text-red-500 text-sm">{errors?.term?.message}</p>}
       </div>
-      <button className="w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold">
-        Submit
+      <button
+        className={`w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold ${
+          isSubmitting ? "opacity-5-" : ""
+        }`}
+        disabled={isSubmitting}
+      >
+        {isSubmitting ? (
+          <div className="w-5 h-5 rounded-full border-2 border-t-2 border-t-transparent animate-spin mx-auto"></div>
+        ) : (
+          "Submit"
+        )}
       </button>
     </form>
   );
