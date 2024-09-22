@@ -5,8 +5,10 @@ const RadioHook = ({ control, ...props }) => {
   const { field } = useController({
     name: props.name,
     control,
-    defaultValue: "",
+    defaultValue: props.value,
   });
+  console.log("radio field", field);
+  
   return (
     <label className="cursor-pointer custom-radio">
       <input type="radio" {...field} {...props} className=" hidden" />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useClickOutSide from "../../hooks/useClickOutSide";
 import { useWatch } from "react-hook-form";
 
@@ -44,6 +44,9 @@ const DropdownHook = ({
   };
 
   const [label, setLabel] = React.useState(dropdownLabel);
+  useEffect(() => {
+    if (jobValue === "") setLabel(dropdownLabel);
+  }, [jobValue]);
   return (
     <div className=" relative" ref={nodeRef}>
       <div

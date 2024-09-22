@@ -64,15 +64,21 @@ const schema = yup
 const RegisterHook = () => {
   const {
     handleSubmit,
-    formState: { errors, isValid, isSubmitting },
+    formState: { errors, isValid, isSubmitting, isSubmitSuccessful },
     control,
     setValue,
     reset,
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
     mode: "onChange",
+    defaultValues: {
+      "gender": "male",
+    }
   });
   console.log(errors);
+
+  const watchGender = watch("gender");
 
   const onSubmitHandler = (values) => {
     if (!isValid) return;
@@ -84,7 +90,7 @@ const RegisterHook = () => {
           username: "",
           email: "",
           password: "",
-          gender: "",
+          gender: "male",
           job: "",
           term: false,
         });
@@ -145,7 +151,7 @@ const RegisterHook = () => {
         <label className=" cursor-pointer">Gender</label>
         <div className=" flex gap-5 items-center">
           <div className="flex items-center gap-x-3">
-            <RadioHook name="gender" control={control} value="male"></RadioHook>
+            <RadioHook name="gender" control={control} value="male" checked={watchGender === "male"}></RadioHook>
             <span>Nam</span>
           </div>
           <div className="flex items-center gap-x-3">
@@ -153,6 +159,7 @@ const RegisterHook = () => {
               name="gender"
               control={control}
               value="female"
+              checked={watchGender === "female"}
             ></RadioHook>
             <span>Nữ</span>
           </div>
