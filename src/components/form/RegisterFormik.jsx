@@ -49,7 +49,7 @@ const RegisterFormik = () => {
         job: "",
         term: false,
       }}
-      validationSchema={validationSchema}
+    //   validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
@@ -66,8 +66,14 @@ const RegisterFormik = () => {
             <label htmlFor="username" className=" cursor-pointer">
               Username
             </label>
-            <InputFormik></InputFormik>
-            <p className=" text-red-500 text-sm">lỗi sml</p>
+            <InputFormik name="username" type="text" label="Username"></InputFormik>
+            {/* <input
+              className="p-4 transition-all bg-white border border-gray-100 rounded-lg outline-none focus:border-blue-500"
+              {...formik.getFieldProps("username")}
+            ></input> */}
+            {formik.touched.username && formik.errors.username && (
+              <p className=" text-red-500 text-sm">{formik.errors.username}</p>
+            )}
           </div>
           <button className="w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold">
             {formik.isSubmitting ? (
