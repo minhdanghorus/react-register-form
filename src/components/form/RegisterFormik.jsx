@@ -49,7 +49,7 @@ const RegisterFormik = () => {
         job: "",
         term: false,
       }}
-    //   validationSchema={validationSchema}
+      validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
           alert(JSON.stringify(values, null, 2));
@@ -62,19 +62,9 @@ const RegisterFormik = () => {
           onSubmit={formik.handleSubmit}
           className="max-w-[300px] mx-auto my-10"
         >
-          <div className="flex flex-col gap-3 mb-5">
-            <label htmlFor="username" className=" cursor-pointer">
-              Username
-            </label>
-            <InputFormik name="username" type="text" label="Username"></InputFormik>
-            {/* <input
-              className="p-4 transition-all bg-white border border-gray-100 rounded-lg outline-none focus:border-blue-500"
-              {...formik.getFieldProps("username")}
-            ></input> */}
-            {formik.touched.username && formik.errors.username && (
-              <p className=" text-red-500 text-sm">{formik.errors.username}</p>
-            )}
-          </div>
+          <InputFormik name="username" type="text" label="Username" placeholder="Enter your username"></InputFormik>
+          <InputFormik name="email" type="email" label="Email" placeholder="Enter your email"></InputFormik>
+          <InputFormik name="password" type="password" label="Password" placeholder="Enter your password"></InputFormik>
           <button className="w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold">
             {formik.isSubmitting ? (
               <div className="w-5 h-5 rounded-full border-2 border-t-2 border-t-transparent animate-spin mx-auto"></div>
