@@ -7,7 +7,7 @@ const InputFormik = ({ label, ...props }) => {
 
   return (
     <div className="flex flex-col gap-3 mb-5">
-      <label htmlFor="username" className=" cursor-pointer">
+      <label htmlFor={props.name} className=" cursor-pointer">
         {label}
       </label>
       <input

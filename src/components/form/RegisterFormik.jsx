@@ -4,6 +4,25 @@ import { Formik } from "formik";
 import * as yup from "yup";
 import RadioFomik from "../radio/RadioFomik";
 import CheckboxFomik from "../checkbox/CheckboxFomik";
+import DropdownFomik from "../dropdown/DropdownFomik";
+
+const dropdownData = [
+  {
+    id: 1,
+    name: "teacher",
+    text: "Teacher",
+  },
+  {
+    id: 2,
+    name: "student",
+    text: "Student",
+  },
+  {
+    id: 3,
+    name: "doctor",
+    text: "Doctor",
+  },
+];
 
 const validationSchema = yup
   .object({
@@ -42,6 +61,7 @@ const validationSchema = yup
   .required();
 
 const RegisterFormik = () => {
+  const setValue = (name, value) => {};
   return (
     <Formik
       initialValues={{
@@ -106,6 +126,13 @@ const RegisterFormik = () => {
                 ></RadioFomik>
               </div>
             </div>
+            <DropdownFomik
+              labelText="Job"
+              setValue={setValue}
+              name="job"
+              data={dropdownData}
+              //   dropdownLabel="Select your job"
+            ></DropdownFomik>
             <CheckboxFomik name="term">
               I accept the terms and conditions
             </CheckboxFomik>
