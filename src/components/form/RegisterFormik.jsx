@@ -2,6 +2,7 @@ import React from "react";
 import InputFormik from "../input/InputFormik";
 import { Formik } from "formik";
 import * as yup from "yup";
+import RadioFomik from "../radio/RadioFomik";
 
 const validationSchema = yup
   .object({
@@ -57,23 +58,56 @@ const RegisterFormik = () => {
         }, 500);
       }}
     >
-      {(formik) => (
-        <form
-          onSubmit={formik.handleSubmit}
-          className="max-w-[300px] mx-auto my-10"
-        >
-          <InputFormik name="username" type="text" label="Username" placeholder="Enter your username"></InputFormik>
-          <InputFormik name="email" type="email" label="Email" placeholder="Enter your email"></InputFormik>
-          <InputFormik name="password" type="password" label="Password" placeholder="Enter your password"></InputFormik>
-          <button className="w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold">
-            {formik.isSubmitting ? (
-              <div className="w-5 h-5 rounded-full border-2 border-t-2 border-t-transparent animate-spin mx-auto"></div>
-            ) : (
-              "Submit"
-            )}
-          </button>
-        </form>
-      )}
+      {(formik) => {
+        const watchGender = formik.values.gender;
+        {/* console.log("watchGender: ", watchGender); */}
+        console.log("value: ", formik.values);
+        return (
+          <form
+            onSubmit={formik.handleSubmit}
+            className="max-w-[300px] mx-auto my-10"
+          >
+            <InputFormik
+              name="username"
+              type="text"
+              label="Username"
+              placeholder="Enter your username"
+            ></InputFormik>
+            <InputFormik
+              name="email"
+              type="email"
+              label="Email"
+              placeholder="Enter your email"
+            ></InputFormik>
+            <InputFormik
+              name="password"
+              type="password"
+              label="Password"
+              placeholder="Enter your password"
+            ></InputFormik>
+            <div className="flex flex-col gap-3 mb-5">
+              <label className=" cursor-pointer">Gender</label>
+              <div className=" flex gap-5 items-center">
+                <div className="flex items-center gap-x-3">
+                  <RadioFomik name="gender" value="male" checked={watchGender === 'male'}></RadioFomik>
+                  <span>Nam</span>
+                </div>
+                <div className="flex items-center gap-x-3">
+                  <RadioFomik name="gender" value="female" checked={watchGender === 'female'}></RadioFomik>
+                  <span>Nữ</span>
+                </div>
+              </div>
+            </div>
+            <button className="w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold">
+              {formik.isSubmitting ? (
+                <div className="w-5 h-5 rounded-full border-2 border-t-2 border-t-transparent animate-spin mx-auto"></div>
+              ) : (
+                "Submit"
+              )}
+            </button>
+          </form>
+        );
+      }}
     </Formik>
   );
 };
