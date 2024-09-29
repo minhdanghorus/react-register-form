@@ -61,7 +61,6 @@ const validationSchema = yup
   .required();
 
 const RegisterFormik = () => {
-  const setValue = (name, value) => {};
   return (
     <Formik
       initialValues={{
@@ -75,7 +74,8 @@ const RegisterFormik = () => {
       validationSchema={validationSchema}
       onSubmit={(values, { setSubmitting }) => {
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
+          // alert(JSON.stringify(values, null, 2));
+          console.log("values: ", values);
           setSubmitting(false);
         }, 500);
       }}
@@ -85,7 +85,9 @@ const RegisterFormik = () => {
         {
           /* console.log("watchGender: ", watchGender); */
         }
-        console.log("formik: ", formik);
+        {
+          /* console.log("formik: ", formik); */
+        }
         return (
           <form
             onSubmit={formik.handleSubmit}
@@ -128,7 +130,7 @@ const RegisterFormik = () => {
             </div>
             <DropdownFomik
               labelText="Job"
-              setValue={setValue}
+              setValue={formik.setFieldValue}
               name="job"
               data={dropdownData}
               //   dropdownLabel="Select your job"
@@ -136,7 +138,11 @@ const RegisterFormik = () => {
             <CheckboxFomik name="term">
               I accept the terms and conditions
             </CheckboxFomik>
-            <button className="w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold">
+            <button
+              type="submit"
+              disabled={formik.isSubmitting}
+              className="w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold"
+            >
               {formik.isSubmitting ? (
                 <div className="w-5 h-5 rounded-full border-2 border-t-2 border-t-transparent animate-spin mx-auto"></div>
               ) : (

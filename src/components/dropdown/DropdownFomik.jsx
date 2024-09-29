@@ -8,13 +8,13 @@ const DropdownFomik = ({
   name,
   data,
   dropdownLabel = "Select your job",
-  ...props
 }) => {
   const { show, setShow, nodeRef } = useClickOutSide();
-  const [field, meta] = useField(props);
+  const [field, meta] = useField({ name });
   //   console.log(jobValue);
 
   const handleClickDropdownItem = (e) => {
+    // console.log(e.target);
     setValue(name, e.target.dataset.value);
     setLabel(e.target.textContent);
     setShow(false);
@@ -26,9 +26,7 @@ const DropdownFomik = ({
   //   }, [jobValue]);
   return (
     <div className="flex flex-col gap-3 mb-5">
-      <label htmlFor={props.id} className=" cursor-pointer">
-        {labelText}
-      </label>
+      <label className=" cursor-pointer">{labelText}</label>
       <div className=" relative" ref={nodeRef}>
         <div
           className="p-5 rounded-lg border border-gray-100 bg-white flex items-center justify-between cursor-pointer"
@@ -61,6 +59,9 @@ const DropdownFomik = ({
             ))}
         </div>
       </div>
+      {meta.touched && meta.error && (
+        <p className=" text-red-500 text-sm">{meta.error}</p>
+      )}
     </div>
   );
 };
