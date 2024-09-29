@@ -72,11 +72,12 @@ const RegisterFormik = () => {
         term: false,
       }}
       validationSchema={validationSchema}
-      onSubmit={(values, { setSubmitting }) => {
+      onSubmit={(values, { setSubmitting, resetForm }) => {
         setTimeout(() => {
           // alert(JSON.stringify(values, null, 2));
           console.log("values: ", values);
           setSubmitting(false);
+          resetForm();
         }, 500);
       }}
     >
@@ -85,9 +86,7 @@ const RegisterFormik = () => {
         {
           /* console.log("watchGender: ", watchGender); */
         }
-        {
-          /* console.log("formik: ", formik); */
-        }
+        {/* console.log("formik: ", formik); */}
         return (
           <form
             onSubmit={formik.handleSubmit}

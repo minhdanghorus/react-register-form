@@ -21,9 +21,9 @@ const DropdownFomik = ({
   };
 
   const [label, setLabel] = React.useState(dropdownLabel);
-  //   useEffect(() => {
-  //     if (jobValue === "") setLabel(dropdownLabel);
-  //   }, [jobValue]);
+    useEffect(() => {
+      if (field.value === "") setLabel(dropdownLabel);
+    }, [field.value, dropdownLabel]);
   return (
     <div className="flex flex-col gap-3 mb-5">
       <label className=" cursor-pointer">{labelText}</label>
