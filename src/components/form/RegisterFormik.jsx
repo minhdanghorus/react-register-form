@@ -3,6 +3,7 @@ import InputFormik from "../input/InputFormik";
 import { Formik } from "formik";
 import * as yup from "yup";
 import RadioFomik from "../radio/RadioFomik";
+import CheckboxFomik from "../checkbox/CheckboxFomik";
 
 const validationSchema = yup
   .object({
@@ -13,14 +14,15 @@ const validationSchema = yup
       .required("Please enter your email"),
     password: yup
       .string()
-      .min(8, "Your password must be at least 8 characters or greater"),
-    // .matches(
-    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-    //   {
-    //     message:
-    //       "Your password must have at least 1 uppercase, 1 lowercase, 1 special character",
-    //   }
-    // ).required("Please enter your password"),
+      .min(8, "Your password must be at least 8 characters or greater")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+        {
+          message:
+            "Your password must have at least 1 uppercase, 1 lowercase, 1 special character",
+        }
+      )
+      .required("Please enter your password"),
     gender: yup
       .string()
       .required("Please select your gender")
@@ -63,7 +65,7 @@ const RegisterFormik = () => {
         {
           /* console.log("watchGender: ", watchGender); */
         }
-        {/* console.log("value: ", formik.values); */}
+        console.log("formik: ", formik);
         return (
           <form
             onSubmit={formik.handleSubmit}
@@ -104,6 +106,9 @@ const RegisterFormik = () => {
                 ></RadioFomik>
               </div>
             </div>
+            <CheckboxFomik name="term">
+              I accept the terms and conditions
+            </CheckboxFomik>
             <button className="w-full p-5 bg-blue-500 text-white rounded-lg mt-5 font-semibold">
               {formik.isSubmitting ? (
                 <div className="w-5 h-5 rounded-full border-2 border-t-2 border-t-transparent animate-spin mx-auto"></div>
